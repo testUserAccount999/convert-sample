@@ -51,6 +51,9 @@ public class StrutsXmlParser {
 
     private static Object parseXml(InputStream inputStream, Class<?> type)
             throws ParserConfigurationException, SAXException, JAXBException {
+        if (inputStream == null) {
+            throw new IllegalArgumentException("inputStream is null.");
+        }
         if (!org.sample.struts.rule.FormValidation.class.equals(type)
                 && !org.sample.struts.validation.FormValidation.class.equals(type)
                 && !StrutsConfig.class.equals(type)) {
