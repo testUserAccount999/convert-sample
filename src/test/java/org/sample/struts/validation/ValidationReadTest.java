@@ -3,7 +3,6 @@ package org.sample.struts.validation;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
@@ -19,14 +18,6 @@ public class ValidationReadTest {
     public void testExecute() throws Exception {
         String xml = "org/sample/struts/validation/validation.xml";
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(xml)) {
-            readTest(inputStream);
-        }
-    }
-
-    @Test
-    public void testM() throws Exception {
-        String xml = "C:/Users/Takahiro Sato/Desktop/hoge-test-master/out/2.xml";
-        try (InputStream inputStream = new FileInputStream(xml)) {
             readTest(inputStream);
         }
     }
