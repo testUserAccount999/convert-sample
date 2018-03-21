@@ -32,32 +32,27 @@ public class StrutsXmlParser {
     private StrutsXmlParser() {
     }
 
-    public static org.sample.struts.rule.FormValidation parseValidationRule(InputStream inputStream,
-            Class<org.sample.struts.rule.FormValidation> formValidation)
+    public static org.sample.struts.rule.FormValidation parseValidationRule(InputStream inputStream)
             throws ParserConfigurationException, SAXException, JAXBException {
-        return (org.sample.struts.rule.FormValidation) parseXml(inputStream, formValidation);
+        return (org.sample.struts.rule.FormValidation) parseXml(inputStream,
+                org.sample.struts.rule.FormValidation.class);
     }
 
-    public static org.sample.struts.validation.FormValidation parseValidation(InputStream inputStream,
-            Class<org.sample.struts.validation.FormValidation> formValidation)
+    public static org.sample.struts.validation.FormValidation parseValidation(InputStream inputStream)
             throws ParserConfigurationException, SAXException, JAXBException {
-        return (org.sample.struts.validation.FormValidation) parseXml(inputStream, formValidation);
+        return (org.sample.struts.validation.FormValidation) parseXml(inputStream,
+                org.sample.struts.validation.FormValidation.class);
     }
 
-    public static StrutsConfig parseStrutsConfig(InputStream inputStream, Class<StrutsConfig> strutsConfig)
+    public static StrutsConfig parseStrutsConfig(InputStream inputStream)
             throws ParserConfigurationException, SAXException, JAXBException {
-        return (StrutsConfig) parseXml(inputStream, strutsConfig);
+        return (StrutsConfig) parseXml(inputStream, StrutsConfig.class);
     }
 
     private static Object parseXml(InputStream inputStream, Class<?> type)
             throws ParserConfigurationException, SAXException, JAXBException {
         if (inputStream == null) {
             throw new IllegalArgumentException("inputStream is null.");
-        }
-        if (!org.sample.struts.rule.FormValidation.class.equals(type)
-                && !org.sample.struts.validation.FormValidation.class.equals(type)
-                && !StrutsConfig.class.equals(type)) {
-            throw new IllegalArgumentException("Illegal Class. name=" + type.getCanonicalName());
         }
         SAXParserFactory spf = SAXParserFactory.newInstance();
         EntityResolver entityResolver = new EntityResolver() {

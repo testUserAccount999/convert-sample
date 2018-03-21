@@ -24,8 +24,7 @@ public class ValidationReadTest {
 
     private void readTest(InputStream inputStream) throws ParserConfigurationException, SAXException, JAXBException {
         assertThat(inputStream, notNullValue());
-        FormValidation formValidation = StrutsXmlParser.parseValidation(inputStream,
-                FormValidation.class);
+        FormValidation formValidation = StrutsXmlParser.parseValidation(inputStream);
         for (Global global : formValidation.getGlobal()) {
             for (Constant constant : global.getConstant()) {
                 assertThat(constant.getConstantName(), notNullValue());
@@ -76,7 +75,7 @@ public class ValidationReadTest {
                         assertThat(msg.getName(), notNullValue());
                         msg.getResource();
                     }
-                    for(Var var : field.getVar()) {
+                    for (Var var : field.getVar()) {
                         assertThat(var.getVarName(), notNullValue());
                         assertThat(var.getVarValue(), notNullValue());
                     }

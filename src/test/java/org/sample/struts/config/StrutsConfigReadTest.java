@@ -25,7 +25,7 @@ public class StrutsConfigReadTest {
 
     private void readTest(InputStream inputStream) throws ParserConfigurationException, SAXException, JAXBException {
         assertThat(inputStream, notNullValue());
-        StrutsConfig strutsConfig = StrutsXmlParser.parseStrutsConfig(inputStream, StrutsConfig.class);
+        StrutsConfig strutsConfig = StrutsXmlParser.parseStrutsConfig(inputStream);
         strutsConfig.getId();
         FormBeans formBeans = strutsConfig.getFormBeans();
         formBeans.getId();
