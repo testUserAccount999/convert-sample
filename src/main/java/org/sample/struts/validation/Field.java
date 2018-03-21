@@ -2,7 +2,7 @@
 // このファイルは、JavaTM Architecture for XML Binding(JAXB) Reference Implementation、v2.2.8-b130911.1802によって生成されました 
 // <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>を参照してください 
 // ソース・スキーマの再コンパイル時にこのファイルの変更は失われます。 
-// 生成日: 2018.03.21 時間 01:39:11 PM JST 
+// 生成日: 2018.03.21 時間 08:28:06 PM JST 
 //
 
 
@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{}msg" minOccurs="0"/>
- *         &lt;element ref="{}arg0" minOccurs="0"/>
- *         &lt;element ref="{}arg1" minOccurs="0"/>
- *         &lt;element ref="{}arg2" minOccurs="0"/>
- *         &lt;element ref="{}arg3" minOccurs="0"/>
+ *         &lt;element ref="{}arg0" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{}arg1" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{}arg2" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{}arg3" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{}var" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
@@ -59,10 +59,10 @@ import javax.xml.bind.annotation.XmlType;
 public class Field {
 
     protected Msg msg;
-    protected Arg0 arg0;
-    protected Arg1 arg1;
-    protected Arg2 arg2;
-    protected Arg3 arg3;
+    protected List<Arg0> arg0;
+    protected List<Arg1> arg1;
+    protected List<Arg2> arg2;
+    protected List<Arg3> arg3;
     protected List<Var> var;
     @XmlAttribute(name = "property", required = true)
     @XmlSchemaType(name = "anySimpleType")
@@ -102,99 +102,119 @@ public class Field {
     }
 
     /**
-     * arg0プロパティの値を取得します。
+     * Gets the value of the arg0 property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Arg0 }
-     *     
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the arg0 property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getArg0().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Arg0 }
+     * 
+     * 
      */
-    public Arg0 getArg0() {
-        return arg0;
+    public List<Arg0> getArg0() {
+        if (arg0 == null) {
+            arg0 = new ArrayList<Arg0>();
+        }
+        return this.arg0;
     }
 
     /**
-     * arg0プロパティの値を設定します。
+     * Gets the value of the arg1 property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Arg0 }
-     *     
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the arg1 property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getArg1().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Arg1 }
+     * 
+     * 
      */
-    public void setArg0(Arg0 value) {
-        this.arg0 = value;
+    public List<Arg1> getArg1() {
+        if (arg1 == null) {
+            arg1 = new ArrayList<Arg1>();
+        }
+        return this.arg1;
     }
 
     /**
-     * arg1プロパティの値を取得します。
+     * Gets the value of the arg2 property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Arg1 }
-     *     
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the arg2 property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getArg2().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Arg2 }
+     * 
+     * 
      */
-    public Arg1 getArg1() {
-        return arg1;
+    public List<Arg2> getArg2() {
+        if (arg2 == null) {
+            arg2 = new ArrayList<Arg2>();
+        }
+        return this.arg2;
     }
 
     /**
-     * arg1プロパティの値を設定します。
+     * Gets the value of the arg3 property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Arg1 }
-     *     
-     */
-    public void setArg1(Arg1 value) {
-        this.arg1 = value;
-    }
-
-    /**
-     * arg2プロパティの値を取得します。
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the arg3 property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Arg2 }
-     *     
-     */
-    public Arg2 getArg2() {
-        return arg2;
-    }
-
-    /**
-     * arg2プロパティの値を設定します。
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getArg3().add(newItem);
+     * </pre>
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Arg2 }
-     *     
-     */
-    public void setArg2(Arg2 value) {
-        this.arg2 = value;
-    }
-
-    /**
-     * arg3プロパティの値を取得します。
      * 
-     * @return
-     *     possible object is
-     *     {@link Arg3 }
-     *     
-     */
-    public Arg3 getArg3() {
-        return arg3;
-    }
-
-    /**
-     * arg3プロパティの値を設定します。
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Arg3 }
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Arg3 }
-     *     
+     * 
      */
-    public void setArg3(Arg3 value) {
-        this.arg3 = value;
+    public List<Arg3> getArg3() {
+        if (arg3 == null) {
+            arg3 = new ArrayList<Arg3>();
+        }
+        return this.arg3;
     }
 
     /**

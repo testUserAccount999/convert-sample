@@ -45,26 +45,22 @@ public class ValidationReadTest {
                     field.getDepends();
                     field.getPage();
                     field.getIndexedListProperty();
-                    Arg0 arg0 = field.getArg0();
-                    if (arg0 != null) {
+                    for (Arg0 arg0 : field.getArg0()) {
                         arg0.getKey();
                         arg0.getName();
                         arg0.getResource();
                     }
-                    Arg1 arg1 = field.getArg1();
-                    if (arg1 != null) {
+                    for (Arg1 arg1 : field.getArg1()) {
                         arg1.getKey();
                         arg1.getName();
                         arg1.getResource();
                     }
-                    Arg2 arg2 = field.getArg2();
-                    if (arg2 != null) {
+                    for (Arg2 arg2 : field.getArg2()) {
                         arg2.getKey();
                         arg2.getName();
                         arg2.getResource();
                     }
-                    Arg3 arg3 = field.getArg3();
-                    if (arg3 != null) {
+                    for (Arg3 arg3 : field.getArg3()) {
                         arg3.getKey();
                         arg3.getName();
                         arg3.getResource();

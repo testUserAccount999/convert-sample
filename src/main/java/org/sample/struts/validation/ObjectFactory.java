@@ -2,7 +2,7 @@
 // このファイルは、JavaTM Architecture for XML Binding(JAXB) Reference Implementation、v2.2.8-b130911.1802によって生成されました 
 // <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>を参照してください 
 // ソース・スキーマの再コンパイル時にこのファイルの変更は失われます。 
-// 生成日: 2018.03.21 時間 01:39:11 PM JST 
+// 生成日: 2018.03.21 時間 08:28:06 PM JST 
 //
 
 
@@ -17,7 +17,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the org.sample.struts.validator package. 
+ * generated in the org.sample.struts.validation package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -37,7 +37,7 @@ public class ObjectFactory {
     private final static QName _ConstantValue_QNAME = new QName("", "constant-value");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.sample.struts.validator
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.sample.struts.validation
      * 
      */
     public ObjectFactory() {
