@@ -1,0 +1,20 @@
+package ${validatorPackage};
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
+import ${formClassName};
+
+public class ${formBean}Validator implements Validator {
+
+	@Override
+	public boolean supports(Class<?> paramClass) {
+		return ${formSimpleClassName}.class.equals(paramClass);
+	}
+
+${validateMethod}
+
+${privateMethod}
+
+}

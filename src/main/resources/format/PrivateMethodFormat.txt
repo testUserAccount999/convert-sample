@@ -1,0 +1,3 @@
+	public void validate${fieldNameUpperCamelCase}(${formSimpleClassName} form, Errors errors) {
+
+	}

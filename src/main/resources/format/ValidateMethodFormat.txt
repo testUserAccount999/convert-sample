@@ -1,0 +1,5 @@
+	@Override
+	public void validate(Object obj, Errors errors) {
+		${formSimpleClassName} form = (${formSimpleClassName}) obj;
+		${executePrivateMethod}
+	}
