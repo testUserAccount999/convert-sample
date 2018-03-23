@@ -15,10 +15,8 @@
       <pattern>%date %level [%thread] %msg%n
       </pattern>
     </encoder>
-    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
       <level>INFO</level>
-      <onMatch>ACCEPT</onMatch>
-      <onMismatch>DENY</onMismatch>
     </filter>
   </appender>
 
@@ -27,10 +25,8 @@
       <pattern>%date %level [%thread] [%file:%line] %msg%n
       </pattern>
     </encoder>
-    <filter class="ch.qos.logback.classic.filter.LevelFilter">
-      <level>DEBUG</level>
-      <onMatch>ACCEPT</onMatch>
-      <onMismatch>DENY</onMismatch>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>TRACE</level>
     </filter>
   </appender>
 
