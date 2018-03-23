@@ -65,6 +65,21 @@ public class CommonValidatorTest {
     }
 
     /**
+     * {@link CommonValidator#validateInteger(Object)}のテスト
+     * @throws Exception テスト失敗
+     */
+    @Test
+    public void testValidateInteger() throws Exception {
+        assertThat(CommonValidator.validateInteger(null), is(true));
+        assertThat(CommonValidator.validateInteger(""), is(true));
+        assertThat(CommonValidator.validateInteger(1), is(true));
+        assertThat(CommonValidator.validateInteger(1.0), is(false));
+        assertThat(CommonValidator.validateInteger("1."), is(false));
+        assertThat(CommonValidator.validateInteger(1), is(true));
+        assertThat(CommonValidator.validateInteger(BigDecimal.ONE), is(true));
+    }
+
+    /**
      * {@link CommonValidator#validateDouble(Object)}のテスト
      * @throws Exception テスト失敗
      */
