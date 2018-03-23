@@ -5,8 +5,9 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import ${formClassName};
+${importValidator}
 
-public class ${formBean}Validator implements Validator {
+public class ${formBeanName}Validator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> paramClass) {
