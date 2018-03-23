@@ -8,6 +8,7 @@ import java.io.InputStream;
 import org.junit.Test;
 import org.sample.struts.util.StrutsXmlParser;
 
+
 public class ValidationRuleReadTest {
 
     @Test
