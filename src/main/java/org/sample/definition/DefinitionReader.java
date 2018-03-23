@@ -24,13 +24,13 @@ import org.xml.sax.SAXException;
 public class DefinitionReader {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefinitionReader.class);
     private String strutsConfig;
-    private String[] validationRule;
-    private String[] validationXml;
+    private String[] validationRules;
+    private String[] validationXmls;
 
-    public DefinitionReader(String strutsConfig, String[] validationXml, String[] validationRule) {
+    public DefinitionReader(String strutsConfig, String[] validationXmls, String[] validationRules) {
         this.strutsConfig = strutsConfig;
-        this.validationXml = validationXml;
-        this.validationRule = validationRule;
+        this.validationXmls = validationXmls;
+        this.validationRules = validationRules;
     }
 
     public Map<String, FormDefinition> readFormDefinition() throws IOException {
@@ -43,7 +43,7 @@ public class DefinitionReader {
             throw new IOException("struts-config読み込みでエラー", e);
         }
         Map<String, String> formBeans = readFormBeans(config);
-        for (String xml : validationXml) {
+        for (String xml : validationXmls) {
             for (Map.Entry<String, FormDefinition> entry : readFormDefinition(xml, formBeans).entrySet()) {
                 if (map.containsKey(entry.getKey())) {
                     LOGGER.info("Form定義重複 : " + entry.getKey() + " を上書きます。");
@@ -56,7 +56,7 @@ public class DefinitionReader {
 
     public Map<String, ValidatorDefinition> readValidatorDefinition() throws IOException {
         Map<String, ValidatorDefinition> map = new HashMap<>();
-        for (String xml : validationRule) {
+        for (String xml : validationRules) {
             for (Map.Entry<String, ValidatorDefinition> entry : readValidatorDefinition(xml).entrySet()) {
                 if (map.containsKey(entry.getKey())) {
                     LOGGER.info("Validator定義重複 : " + entry.getKey() + " を上書きます。");
@@ -86,9 +86,10 @@ public class DefinitionReader {
                         FieldDefinition fieldDefinition = new FieldDefinition(field);
                         formDefinition.addFieldDefinition(fieldDefinition);
                     }
+                    LOGGER.debug("form-bean : " + formBeanName + " の定義を読み込みました。");
                     map.put(formBeanName, formDefinition);
                 } else {
-                    LOGGER.info("form-beansにform : " + formBeanName + " は存在しません。スキップします。");
+                    LOGGER.info("form-beansにform-bean : " + formBeanName + " は存在しません。スキップします。");
                 }
             }
         }
@@ -119,7 +120,7 @@ public class DefinitionReader {
     private Map<String, String> readFormBeans(StrutsConfig strutsConfig) {
         Map<String, String> map = new HashMap<>();
         for (FormBean formBean : strutsConfig.getFormBeans().getFormBean()) {
-            map.put(formBean.getName(), formBean.getClassName());
+            map.put(formBean.getName(), formBean.getType());
         }
         return map;
     }
