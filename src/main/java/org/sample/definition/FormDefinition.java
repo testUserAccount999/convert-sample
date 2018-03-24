@@ -32,7 +32,7 @@ public class FormDefinition {
     }
 
     public void addFieldDefinition(FieldDefinition fieldDefinition) {
-        if(!fieldDefinitions.containsKey(fieldDefinition.getProperty())) {
+        if (!fieldDefinitions.containsKey(fieldDefinition.getProperty())) {
             fieldDefinitions.put(fieldDefinition.getProperty(), new ArrayList<>());
         }
         fieldDefinitions.get(fieldDefinition.getProperty()).add(fieldDefinition);
@@ -40,9 +40,6 @@ public class FormDefinition {
 
     public Map<String, List<FieldDefinition>> getFieldDefinitions() {
         return fieldDefinitions;
-    }
-
-    public void addFieldDefitnion(FieldDefinition FieldDefinition) {
     }
 
 }

@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.*;
 import java.io.InputStream;
 
 import org.junit.Test;
+import org.sample.util.ResourceUtil;
 
 public class StrutsXmlParserTest {
 
@@ -17,15 +18,15 @@ public class StrutsXmlParserTest {
     @Test
     public void testArgument() throws Exception {
         String xml = "org/sample/struts/config/struts-config.xml";
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(xml)) {
+        try (InputStream inputStream = ResourceUtil.getInputStream(xml)) {
             assertThat(StrutsXmlParser.parseStrutsConfig(inputStream), notNullValue());
         }
         xml = "org/sample/struts/validation/validation.xml";
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(xml)) {
+        try (InputStream inputStream = ResourceUtil.getInputStream(xml)) {
             assertThat(StrutsXmlParser.parseValidation(inputStream), notNullValue());
         }
         xml = "org/sample/struts/rule/validator-rules.xml";
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(xml)) {
+        try (InputStream inputStream = ResourceUtil.getInputStream(xml)) {
             assertThat(StrutsXmlParser.parseValidationRule(inputStream), notNullValue());
         }
     }

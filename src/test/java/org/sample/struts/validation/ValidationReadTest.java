@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.Test;
 import org.sample.struts.util.StrutsXmlParser;
+import org.sample.util.ResourceUtil;
 import org.xml.sax.SAXException;
 
 public class ValidationReadTest {
@@ -17,7 +18,7 @@ public class ValidationReadTest {
     @Test
     public void testExecute() throws Exception {
         String xml = "org/sample/struts/validation/validation.xml";
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(xml)) {
+        try (InputStream inputStream = ResourceUtil.getInputStream(xml)) {
             readTest(inputStream);
         }
     }

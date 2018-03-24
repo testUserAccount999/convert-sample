@@ -17,6 +17,7 @@ import org.sample.struts.validation.FormValidation;
 import org.sample.struts.validation.Formset;
 import org.sample.struts.validation.Msg;
 import org.sample.struts.validation.Var;
+import org.sample.util.ResourceUtil;
 
 public class VlidatetionXmlWriteTest {
     private static final String EMPTY = "";
@@ -27,7 +28,7 @@ public class VlidatetionXmlWriteTest {
         final String xml = "org/sample/struts/validation/validation.xml";
         final String xlsx = "target/validation.xml.xlsx";
         FormValidation formValidation = null;
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(xml)) {
+        try (InputStream inputStream = ResourceUtil.getInputStream(xml)) {
             formValidation = StrutsXmlParser.parseValidation(inputStream);
         }
         SXSSFWorkbook wb = new SXSSFWorkbook(1000);

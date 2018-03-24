@@ -1,6 +1,5 @@
 package org.sample.definition;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -17,6 +16,7 @@ import org.sample.struts.util.StrutsXmlParser;
 import org.sample.struts.validation.Field;
 import org.sample.struts.validation.Form;
 import org.sample.struts.validation.Formset;
+import org.sample.util.ResourceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -36,7 +36,7 @@ public class DefinitionReader {
     public Map<String, FormDefinition> readFormDefinition() throws IOException {
         Map<String, FormDefinition> map = new HashMap<>();
         StrutsConfig config = null;
-        try (InputStream inputStreamStrutsConfig = getInputStream(strutsConfig)) {
+        try (InputStream inputStreamStrutsConfig = ResourceUtil.getInputStream(strutsConfig)) {
             config = StrutsXmlParser.parseStrutsConfig(inputStreamStrutsConfig);
         } catch (Exception e) {
             // エラーハンドリングが面倒なのでIOExceptionにラップ
@@ -70,7 +70,7 @@ public class DefinitionReader {
     private Map<String, FormDefinition> readFormDefinition(String xml, Map<String, String> formBeans) throws IOException {
         Map<String, FormDefinition> map = new HashMap<>();
         org.sample.struts.validation.FormValidation formValidation = null;
-        try (InputStream inputStreamValidationXml = getInputStream(xml);) {
+        try (InputStream inputStreamValidationXml = ResourceUtil.getInputStream(xml);) {
             formValidation = StrutsXmlParser.parseValidation(inputStreamValidationXml);
         } catch (Exception e) {
             // エラーハンドリングが面倒なのでIOExceptionにラップ
@@ -82,9 +82,13 @@ public class DefinitionReader {
                 if (formBeans.containsKey(formBeanName)) {
                     String formClassName = formBeans.get(formBeanName);
                     FormDefinition formDefinition = new FormDefinition(formBeanName, formClassName);
+                    int definitionOrder = 0;
                     for (Field field : form.getField()) {
-                        FieldDefinition fieldDefinition = new FieldDefinition(field);
+                        FieldDefinition fieldDefinition = new FieldDefinition(field, String.format("%03d", definitionOrder++));
                         formDefinition.addFieldDefinition(fieldDefinition);
+                        if (!fieldDefinition.isValidIfCondition()) {
+                            LOGGER.info("form-bean : " + formBeanName + " の property : " + field.getProperty() + " には有効にはならないValidatorの指定があります。");
+                        }
                     }
                     LOGGER.debug("form-bean : " + formBeanName + " の定義を読み込みました。");
                     map.put(formBeanName, formDefinition);
@@ -99,7 +103,7 @@ public class DefinitionReader {
     private Map<String, ValidatorDefinition> readValidatorDefinition(String xml) throws IOException {
         Map<String, ValidatorDefinition> map = new HashMap<>();
         org.sample.struts.rule.FormValidation formValidation = null;
-        try (InputStream inputStreamValidationRule = getInputStream(xml)) {
+        try (InputStream inputStreamValidationRule = ResourceUtil.getInputStream(xml)) {
             formValidation = StrutsXmlParser.parseValidationRule(inputStreamValidationRule);
         } catch (ParserConfigurationException | SAXException | JAXBException e) {
             // エラーハンドリングが面倒なのでIOExceptionにラップ
@@ -125,11 +129,4 @@ public class DefinitionReader {
         return map;
     }
 
-    private InputStream getInputStream(String path) throws IOException {
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
-        if (inputStream == null) {
-            inputStream = new FileInputStream(path);
-        }
-        return inputStream;
-    }
 }

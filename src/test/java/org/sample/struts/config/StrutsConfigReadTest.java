@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.Test;
 import org.sample.struts.util.StrutsXmlParser;
+import org.sample.util.ResourceUtil;
 import org.xml.sax.SAXException;
 
 public class StrutsConfigReadTest {
@@ -18,7 +19,7 @@ public class StrutsConfigReadTest {
     @Test
     public void testExecute() throws java.lang.Exception {
         String xml = "org/sample/struts/config/struts-config.xml";
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(xml)) {
+        try (InputStream inputStream = ResourceUtil.getInputStream(xml)) {
             readTest(inputStream);
         }
     }

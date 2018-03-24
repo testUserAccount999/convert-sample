@@ -1,0 +1,4 @@
+		if (!CommonValidator.validateDouble(form.get${propertyUpperCamelCase}())) {
+			errors.reject("${property}", "${msg}", new Object[]{${args}}, null);
+			return;
+		}
