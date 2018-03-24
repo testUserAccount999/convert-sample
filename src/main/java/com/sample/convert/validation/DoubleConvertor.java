@@ -1,27 +1,28 @@
-package com.sample.convert;
+package com.sample.convert.validation;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.sample.definition.DefinitionValues;
 import org.sample.definition.FieldDefinition;
-import org.sample.definition.ValidatorDefinition;
 import org.sample.util.FormatUtil;
 import org.sample.util.ResourceUtil;
 
-public class DoubleConvertor implements Convertor {
+public class DoubleConvertor implements ValidationConvertor {
     private static final String VALIDATOR_NAME = "double";
-    private static final String FORMAT_PATH = "format/doubleFormat.txt";
-    private ValidatorDefinition validatorDefinition;
-    private String format;
+    private static final String FORMAT_PATH = FORMAT_PATH_PREFIX + VALIDATOR_NAME + FORMAT_PATH_SUFFIX;
+    private static String format;
 
-    public DoubleConvertor(ValidatorDefinition validatorDefinition) {
+    static {
         try {
             format = ResourceUtil.readAll(FORMAT_PATH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.validatorDefinition = validatorDefinition;
+    }
+
+    public DoubleConvertor() {
     }
 
     @Override
@@ -31,7 +32,7 @@ public class DoubleConvertor implements Convertor {
         keyValue.put("property", property);
         String propertyUpperCamelCase = FormatUtil.toUpperCamelProperty(property);
         keyValue.put("propertyUpperCamelCase", propertyUpperCamelCase);
-        String msg = validatorDefinition.getValidator().getMsg();
+        String msg = DefinitionValues.getValidatorDefinition(VALIDATOR_NAME).getValidator().getMsg();
         if (VALIDATOR_NAME.equals(fieldDefinition.getField().getMsg().getName())) {
             msg = fieldDefinition.getField().getMsg().getKey();
         }

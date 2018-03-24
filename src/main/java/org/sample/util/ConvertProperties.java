@@ -1,24 +1,24 @@
 package org.sample.util;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ConvertProperties {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConvertProperties.class);
     private static final String DEFAULT_PROPERTIES = "org.sample.convert.properties";
-    private static ConvertProperties me;
     private static Map<String, String> map;
 
-    private ConvertProperties() {
+    static {
         String path = System.getProperty(DEFAULT_PROPERTIES, DEFAULT_PROPERTIES);
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
-            if (inputStream == null) {
-                inputStream = new FileInputStream(path);
-            }
+            LOGGER.info("プロパティファイルを読み込みます。path=" + path);
+            InputStream inputStream = ResourceUtil.getInputStream(path);
             Properties properties = new Properties();
             properties.load(inputStream);
             inputStream.close();
@@ -30,16 +30,13 @@ public class ConvertProperties {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        LOGGER.info("プロパティファイルを読み込みました。path=" + path);
     }
 
-    private static final void initialize() {
-        if (me == null) {
-            me = new ConvertProperties();
-        }
+    private ConvertProperties() {
     }
 
     public static final String get(String key) {
-        initialize();
         return map.get(key);
     }
 }

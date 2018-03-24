@@ -1,4 +1,4 @@
-package com.sample.convert;
+package com.sample.convert.validation;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -8,17 +8,19 @@ import org.sample.definition.FieldDefinition;
 import org.sample.util.FormatUtil;
 import org.sample.util.ResourceUtil;
 
-public class PreparationConvertor implements Convertor {
+public class PreparationConvertor implements ValidationConvertor {
     private static final String VALIDATOR_NAME = "preparation";
-    private static final String FORMAT_PATH = "format/" + VALIDATOR_NAME + "Format.txt";
-    private String format;
-
-    public PreparationConvertor() {
+    private static final String FORMAT_PATH = FORMAT_PATH_PREFIX + VALIDATOR_NAME + FORMAT_PATH_SUFFIX;
+    private static String format;
+    static {
         try {
             format = ResourceUtil.readAll(FORMAT_PATH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public PreparationConvertor() {
     }
 
     @Override
