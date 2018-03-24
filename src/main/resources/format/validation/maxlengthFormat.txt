@@ -1,0 +1,4 @@
+		if (!CommonValidator.validateMaxLength(form.get${propertyUpperCamelCase}(), ${maxlength})) {
+			errors.reject("${property}", "${msg}", new Object[]{${args}}, null);
+			return;
+		}

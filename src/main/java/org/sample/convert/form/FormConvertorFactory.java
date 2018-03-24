@@ -1,4 +1,4 @@
-package com.sample.convert.form;
+package org.sample.convert.form;
 
 import org.sample.definition.FormDefinition;
 

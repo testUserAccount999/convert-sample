@@ -79,26 +79,26 @@ public final class DefinitionUtil {
         if (!isMultiFieldDefinition) {
             return true;
         }
-        boolean isIrregularOrder = false;
-        for (Map.Entry<String, List<FieldDefinition>> entry : formDefinition.getFieldDefinitions().entrySet()) {
-            if (entry.getValue().size() != 1) {
-                List<FieldDefinition> definitions = entry.getValue();
-                for (int i = 0; i < definitions.size() - 1; i++) {
-                    int order = Integer.valueOf(definitions.get(i).getDefinitionOrder());
-                    int nextOrder = Integer.valueOf(definitions.get(i + 1).getDefinitionOrder());
-                    if ((nextOrder - order) != 1) {
-                        isIrregularOrder = true;
-                        break;
-                    }
-                }
-                if (isIrregularOrder) {
-                    break;
-                }
-            }
-        }
-        if (!isIrregularOrder) {
-            return true;
-        }
+//        boolean isIrregularOrder = false;
+//        for (Map.Entry<String, List<FieldDefinition>> entry : formDefinition.getFieldDefinitions().entrySet()) {
+//            if (entry.getValue().size() != 1) {
+//                List<FieldDefinition> definitions = entry.getValue();
+//                for (int i = 0; i < definitions.size() - 1; i++) {
+//                    int order = Integer.valueOf(definitions.get(i).getDefinitionOrder());
+//                    int nextOrder = Integer.valueOf(definitions.get(i + 1).getDefinitionOrder());
+//                    if ((nextOrder - order) != 1) {
+//                        isIrregularOrder = true;
+//                        break;
+//                    }
+//                }
+//                if (isIrregularOrder) {
+//                    break;
+//                }
+//            }
+//        }
+//        if (!isIrregularOrder) {
+//            return true;
+//        }
         return false;
     }
 
@@ -124,8 +124,10 @@ public final class DefinitionUtil {
             String fieldName = varMap.get("field[" + i + "]");
             String fieldTest = varMap.get("fieldTest[" + i + "]");
             String fieldValue = varMap.get("fieldValue[" + i + "]");
-            FieldCondition fieldCondition = new FieldCondition(fieldName, fieldTest, fieldValue);
-            ifCondition.addFieldCondition(fieldCondition);
+            if (fieldName != null) {
+                FieldCondition fieldCondition = new FieldCondition(fieldName, fieldTest, fieldValue);
+                ifCondition.addFieldCondition(fieldCondition);
+            }
             i++;
         }
         return ifCondition;

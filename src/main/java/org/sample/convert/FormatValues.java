@@ -1,4 +1,4 @@
-package com.sample.convert;
+package org.sample.convert;
 
 import org.sample.util.ConvertProperties;
 import org.sample.util.ResourceUtil;

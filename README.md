@@ -1,6 +1,9 @@
 # convert-sample
 sample
 
+struts定義からspringのFormValidatorを生成することを目指します。
+
+
 ## dtd
 [struts-1.1](https://archive.apache.org/dist/struts/struts-1.1/jakarta-struts-1.1-src.zip)
 

@@ -1,0 +1,4 @@
+		if (!CommonValidator.validateIntRange(form.get${propertyUpperCamelCase}(), %{min}, %{min})) {
+			errors.reject("${property}", "${msg}", new Object[]{${args}}, null);
+			return;
+		}
