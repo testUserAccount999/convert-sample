@@ -24,10 +24,10 @@ public class PreparationConvertor implements ValidationConvertor {
     }
 
     @Override
-    public String convert(FieldDefinition fieldDefinition) {
+    public ConvertValue convert(FieldDefinition fieldDefinition) {
         Map<String, String> keyValue = new HashMap<>();
         keyValue.put("propertyUpperCamelCase", FormatUtil.toUpperCamelProperty(fieldDefinition.getProperty()));
-        return FormatUtil.format(format, keyValue);
+        return new ConvertValue(format, keyValue);
     }
 
 }

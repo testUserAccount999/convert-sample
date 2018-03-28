@@ -42,7 +42,7 @@ public class SimpleFormConvertor implements FormConvertor {
             StringBuilder validateLogic = new StringBuilder();
             for (String depend : fieldDefinition.getDepends()) {
                 ValidationConvertor validationConvertor = factory.create(depend);
-                String temp = validationConvertor.convert(fieldDefinition);
+                String temp = validationConvertor.convert(fieldDefinition).toString();
                 if (!StringUtils.isBlankOrNull(temp)) {
                     validateLogic.append(temp);
                 }

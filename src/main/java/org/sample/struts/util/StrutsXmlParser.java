@@ -21,7 +21,9 @@ import org.xml.sax.XMLReader;
 
 public class StrutsXmlParser {
     private static final Set<String> IGNORE_PUBLIC_IDS = new HashSet<String>() {
-        {
+		private static final long serialVersionUID = 1L;
+
+		{
             add("-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN");
             add("-//Apache Software Foundation//DTD Struts Configuration 1.0//EN");
             add("-//Apache Software Foundation//DTD Struts Configuration 1.1//EN");

@@ -23,7 +23,7 @@ public class RequiredConvertor implements ValidationConvertor {
     }
 
     @Override
-    public String convert(FieldDefinition fieldDefinition) {
+    public ConvertValue convert(FieldDefinition fieldDefinition) {
         Map<String, String> keyValue = new HashMap<>();
         String property = fieldDefinition.getProperty();
         keyValue.put("property", property);
@@ -35,7 +35,7 @@ public class RequiredConvertor implements ValidationConvertor {
         }
         keyValue.put("msg", msg);
         keyValue.put("args", FormatUtil.createArgs(fieldDefinition.getArgDefinition(VALIDATOR_NAME)));
-        return FormatUtil.format(format, keyValue);
+        return new ConvertValue(format, keyValue);
     }
 
 }

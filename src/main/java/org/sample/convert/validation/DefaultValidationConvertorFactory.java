@@ -26,10 +26,10 @@ public class DefaultValidationConvertorFactory implements ValidationConvertorFac
         }
         if (convertor == null) {
             convertor = new ValidationConvertor() {
-                @Override
-                public String convert(FieldDefinition fieldDefinition) {
-                    return "";
-                }
+				@Override
+				public ConvertValue convert(FieldDefinition fieldDefinition) {
+					return new ConvertValue();
+				}
             };
         }
         return convertor;

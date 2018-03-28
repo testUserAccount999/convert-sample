@@ -27,7 +27,7 @@ public class IntRangeConvertor implements ValidationConvertor {
     }
 
     @Override
-    public String convert(FieldDefinition fieldDefinition) {
+    public ConvertValue convert(FieldDefinition fieldDefinition) {
         String integerPart = "";
         boolean dependInteger = false;
         for (String depend : DefinitionValues.getValidatorDefinition(VALIDATOR_NAME).getDepends()) {
@@ -36,9 +36,10 @@ public class IntRangeConvertor implements ValidationConvertor {
             }
         }
         if (dependInteger) {
-            if(!Arrays.asList(DefinitionValues.getValidatorDefinition(VALIDATOR_NAME).getDepends()).contains("integer")) {
-                integerPart = new IntegerConvertor().convert(fieldDefinition);
-            }
+			if (!Arrays.asList(DefinitionValues.getValidatorDefinition(VALIDATOR_NAME).getDepends()).contains("integer")) {
+				ConvertValue convertValue = new IntegerConvertor().convert(fieldDefinition);
+				integerPart = convertValue.toString();
+			}
         }
         Map<String, String> keyValue = new HashMap<>();
         String property = fieldDefinition.getProperty();
@@ -53,7 +54,7 @@ public class IntRangeConvertor implements ValidationConvertor {
         keyValue.put("max", fieldDefinition.getVarValue("max"));
         keyValue.put("msg", msg);
         keyValue.put("args", FormatUtil.createArgs(fieldDefinition.getArgDefinition(VALIDATOR_NAME)));
-        return integerPart + FormatUtil.format(format, keyValue);
+        return new ConvertValue(integerPart + format, keyValue);
     }
 
 }
