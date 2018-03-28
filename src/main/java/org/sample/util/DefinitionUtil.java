@@ -31,7 +31,7 @@ public final class DefinitionUtil {
             for (FieldDefinition fieldDefinition : entry.getValue()) {
                 String condition = "[NULL]";
                 if (fieldDefinition.getIfCondition() != null) {
-                    condition = fieldDefinition.getIfCondition().getConditionString();
+                    condition = fieldDefinition.getIfCondition().toConditionString();
                 }
                 if (!tempMap.containsKey(condition)) {
                     tempMap.put(condition, new ArrayList<>());
@@ -76,30 +76,7 @@ public final class DefinitionUtil {
                 break;
             }
         }
-        if (!isMultiFieldDefinition) {
-            return true;
-        }
-//        boolean isIrregularOrder = false;
-//        for (Map.Entry<String, List<FieldDefinition>> entry : formDefinition.getFieldDefinitions().entrySet()) {
-//            if (entry.getValue().size() != 1) {
-//                List<FieldDefinition> definitions = entry.getValue();
-//                for (int i = 0; i < definitions.size() - 1; i++) {
-//                    int order = Integer.valueOf(definitions.get(i).getDefinitionOrder());
-//                    int nextOrder = Integer.valueOf(definitions.get(i + 1).getDefinitionOrder());
-//                    if ((nextOrder - order) != 1) {
-//                        isIrregularOrder = true;
-//                        break;
-//                    }
-//                }
-//                if (isIrregularOrder) {
-//                    break;
-//                }
-//            }
-//        }
-//        if (!isIrregularOrder) {
-//            return true;
-//        }
-        return false;
+        return !isMultiFieldDefinition;
     }
 
     public static final Map<String, List<FieldDefinition>> groupFieldDefiniton(List<FieldDefinition> fieldDefinitionList) {
@@ -124,7 +101,7 @@ public final class DefinitionUtil {
             String fieldName = varMap.get("field[" + i + "]");
             String fieldTest = varMap.get("fieldTest[" + i + "]");
             String fieldValue = varMap.get("fieldValue[" + i + "]");
-            if (fieldName != null) {
+            if (fieldTest != null) {
                 FieldCondition fieldCondition = new FieldCondition(fieldName, fieldTest, fieldValue);
                 ifCondition.addFieldCondition(fieldCondition);
             }

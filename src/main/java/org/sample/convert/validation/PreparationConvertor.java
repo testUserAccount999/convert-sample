@@ -26,7 +26,6 @@ public class PreparationConvertor implements ValidationConvertor {
     @Override
     public String convert(FieldDefinition fieldDefinition) {
         Map<String, String> keyValue = new HashMap<>();
-        keyValue.put("property", fieldDefinition.getProperty());
         keyValue.put("propertyUpperCamelCase", FormatUtil.toUpperCamelProperty(fieldDefinition.getProperty()));
         return FormatUtil.format(format, keyValue);
     }

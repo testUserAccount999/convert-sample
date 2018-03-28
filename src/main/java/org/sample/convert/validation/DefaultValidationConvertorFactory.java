@@ -4,9 +4,6 @@ import org.sample.definition.FieldDefinition;
 
 public class DefaultValidationConvertorFactory implements ValidationConvertorFactory {
 
-    public DefaultValidationConvertorFactory() {
-    }
-
     @Override
     public ValidationConvertor create(String validatorName) {
         ValidationConvertor convertor = null;
@@ -22,10 +19,10 @@ public class DefaultValidationConvertorFactory implements ValidationConvertorFac
             convertor = new MinlengthConvertor();
         } else if ("required".equals(validatorName)) {
             convertor = new RequiredConvertor();
-        } else if ("requiredif".equals(validatorName)) {
-            convertor = new RequiredifConvertor();
         } else if ("preparation".equals(validatorName)) {
             convertor = new PreparationConvertor();
+        } else if ("".equals(validatorName)) {
+            convertor = new RequiredIfConvertor(validatorName);
         }
         if (convertor == null) {
             convertor = new ValidationConvertor() {

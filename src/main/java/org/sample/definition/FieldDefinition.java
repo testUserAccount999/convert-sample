@@ -35,7 +35,7 @@ public class FieldDefinition {
             varMap.put(var.getVarName(), var.getVarValue());
         }
         for (String depend : depends) {
-            if (depend.endsWith("if")) {
+            if (depend.endsWith("if") || depend.endsWith("if2") || depend.endsWith("if3")) {
                 containsIf = true;
                 break;
             }

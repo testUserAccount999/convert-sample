@@ -24,7 +24,7 @@ public class IfCondition {
         fieldConditions.add(fieldCondition);
     }
 
-    public String getConditionString() {
+    public String toConditionString() {
         List<String> list = new ArrayList<>();
         for (FieldCondition condition : fieldConditions) {
             String str = "name=" + condition.getFieldName() + ", test=" + condition.getFieldTest() + ", value=" + condition.getFieldValue();

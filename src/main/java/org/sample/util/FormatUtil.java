@@ -6,19 +6,66 @@ import java.io.StringReader;
 import java.util.Map;
 
 import org.sample.definition.ArgDefinition;
+import org.sample.definition.FieldCondition;
+import org.sample.definition.IfCondition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *
+ *
+ */
 public class FormatUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(FormatUtil.class);
 
+    /**
+     *
+     */
     private FormatUtil() {
+    }
+
+    public static final String createCondition(IfCondition ifCondition) {
+        if (ifCondition.getFieldConditions().isEmpty()) {
+            throw new IllegalArgumentException("条件が設定されていません。");
+        }
+
+        String join = " && ";
+        if ("OR".equals(ifCondition.getFieldJoin())) {
+            join = " || ";
+        }
+        StringBuilder returnSb = new StringBuilder();
+        for (int i = 0; i < ifCondition.getFieldConditions().size(); i++) {
+            FieldCondition condition = ifCondition.getFieldConditions().get(i);
+            StringBuilder sb = new StringBuilder();
+            String propertyUpperCamelCase = toUpperCamelProperty(condition.getFieldName());
+            String test = condition.getFieldTest();
+            if ("EQUAL".equalsIgnoreCase(test) || "NOTEQUAL".equalsIgnoreCase(test)) {
+                String testValue = condition.getFieldValue();
+                sb.append('"').append(testValue).append('"').append(".equalsIgnoreCase(");
+                sb.append("StringUtils.toStringValue(form.get").append(propertyUpperCamelCase);
+                sb.append("())");
+            } else if ("NULL".equalsIgnoreCase(test) || "NOTNULL".equalsIgnoreCase(test)) {
+                sb.append("StringUtils.isBlankOrNull(form.get");
+                sb.append(propertyUpperCamelCase);
+                sb.append("())");
+            } else {
+                throw new IllegalArgumentException("想定しない条件が設定されています。fieldTest=" + test);
+            }
+            if ("NOTEQUAL".equalsIgnoreCase(test) || "NOTEQUAL".equalsIgnoreCase(test)) {
+                sb.insert(0, '!');
+            }
+            if (i != ifCondition.getFieldConditions().size() - 1) {
+                sb.append(join);
+            }
+            returnSb.append(sb);
+        }
+        return returnSb.toString();
     }
 
     public static final String createArgs(ArgDefinition[] argDefinitions) {
         // TODO errorArgsの作成は要検討
         String arg = "";
-        if(argDefinitions == null) {
+        if (argDefinitions == null) {
             return arg;
         }
         for (int i = 0; i < argDefinitions.length; i++) {

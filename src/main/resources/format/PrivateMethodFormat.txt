@@ -1,3 +1,6 @@
+	/**
+	 *
+	 */
 	public void validate${propertyUpperCamelCase}(${formSimpleClassName} form, Errors errors) {
 ${validateLogic}
 	}
