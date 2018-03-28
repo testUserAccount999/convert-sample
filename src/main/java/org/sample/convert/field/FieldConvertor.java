@@ -1,5 +1,7 @@
 package org.sample.convert.field;
 
-public interface FieldConvertor {
+import org.sample.definition.FieldDefinition;
 
+public interface FieldConvertor {
+	String convert(FieldDefinition fieldDefinition);
 }
