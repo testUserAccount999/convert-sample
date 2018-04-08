@@ -40,11 +40,16 @@ public class SimpleFormConvertor implements FormConvertor {
             methodKeyValue.put("propertyUpperCamelCase", propertyUpperCamelCase);
             executePrivateMethod.append("\t\tvalidate").append(propertyUpperCamelCase).append("(form, errors);");
             StringBuilder validateLogic = new StringBuilder();
-            for (String depend : fieldDefinition.getDepends()) {
+            for (int j = 0; j < fieldDefinition.getDepends().length; j++) {
+                String depend = fieldDefinition.getDepends()[j];
                 ValidationConvertor validationConvertor = factory.create(depend);
                 String temp = validationConvertor.convert(fieldDefinition).toString();
                 if (!StringUtils.isBlankOrNull(temp)) {
-                    validateLogic.append(temp);
+                    if (j > 0 && fieldDefinition.getDepends()[j - 1].contains("if") && fieldDefinition.isValidIfCondition()) {
+                        validateLogic = FormatUtil.mergeBranchLogic(validateLogic.toString(), temp);
+                    } else {
+                        validateLogic.append(temp);
+                    }
                 }
             }
             methodKeyValue.put("validateLogic", validateLogic.toString());
@@ -67,8 +72,14 @@ public class SimpleFormConvertor implements FormConvertor {
         classKeyValue.put("executePrivateMethod", executePrivateMethod.toString());
         String validateMethod = FormatUtil.format(FormatValues.getValidateMethodFormat(), classKeyValue);
         classKeyValue.put("validateMethod", validateMethod);
+        String validatorString = FormatUtil.format(FormatValues.getClassFormat(), classKeyValue);
+        // importの解決
+        String importClasses = FormatUtil.resolveImportClass(validatorString);
+        classKeyValue.put("importClasses", importClasses);
+        validatorString = FormatUtil.format(FormatValues.getClassFormat(), classKeyValue);
+        validatorString = new DefaultAdjustmentFactory().create().adjust(formBeanName, validatorString);
         LOGGER.debug("convert end. form-bean=" + formDefinition.getFormBeanName());
-        return FormatUtil.format(FormatValues.getClassFormat(), classKeyValue);
+        return validatorString;
     }
 
 }

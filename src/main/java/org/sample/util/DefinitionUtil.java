@@ -49,6 +49,9 @@ public final class DefinitionUtil {
     }
 
     public static final List<FieldDefinition> sortFieldDefinition(FormDefinition formDefinition) {
+        if(!isSimpleDefiniton(formDefinition)) {
+            throw new IllegalArgumentException("isSimpleDefinitonがfalseの定義には使用できません。formBeanName=" + formDefinition.getFormBeanName());
+        }
         List<FieldDefinition> sorted = new ArrayList<>();
         for (Map.Entry<String, List<FieldDefinition>> entry : formDefinition.getFieldDefinitions().entrySet()) {
             sorted.addAll(entry.getValue());
@@ -56,7 +59,7 @@ public final class DefinitionUtil {
         return sortFieldDefinitonList(sorted);
     }
 
-    private static List<FieldDefinition> sortFieldDefinitonList(List<FieldDefinition> list) {
+    public static List<FieldDefinition> sortFieldDefinitonList(List<FieldDefinition> list) {
         List<FieldDefinition> sorted = new ArrayList<>(list);
         Collections.sort(sorted, new Comparator<FieldDefinition>() {
             @Override

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 public final class ResourceUtil {
 
@@ -13,7 +14,7 @@ public final class ResourceUtil {
 
     public static String readAll(String path) throws IOException {
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getInputStream(path)))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getInputStream(path), Charset.forName("UTF-8")))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append(System.lineSeparator());

@@ -1,4 +1,4 @@
-		if (!CommonValidator.validateMinLength(form.get${propertyUpperCamelCase}(), ${minlength}))) {
-			errors.reject("${property}", "${msg}", new Object[]{${args}}, null);
+		if (!${org.sample.convert.util.minlength}.validateMinLength(form.get${propertyUpperCamelCase}(), ${minlength})) {
+			errors.rejectValue("${property}", "${msg}", ${args}, null);
 			return;
 		}

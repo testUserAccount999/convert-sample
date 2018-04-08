@@ -1,1 +1,0 @@
-		form.set${propertyUpperCamelCase}(CharConv.charConv(form.get${propertyUpperCamelCase}()));

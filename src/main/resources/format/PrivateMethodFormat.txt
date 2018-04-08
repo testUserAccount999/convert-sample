@@ -1,6 +1,8 @@
 	/**
-	 *
+	 * プロパティ：${property}の単項目精査処理<br />
+	 * @param form フォーム
+	 * @param errors エラー情報
 	 */
-	public void validate${propertyUpperCamelCase}(${formSimpleClassName} form, Errors errors) {
+	private void validate${propertyUpperCamelCase}(${formSimpleClassName} form, Errors errors) {
 ${validateLogic}
 	}

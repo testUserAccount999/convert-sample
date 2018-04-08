@@ -1,4 +1,4 @@
-		if (!CommonValidator.validateInteger(form.get${propertyUpperCamelCase}())) {
-			errors.reject("${property}", "${msg}", new Object[]{${args}}, null);
+		if (!${org.sample.convert.util.integer}.validateInteger(form.get${propertyUpperCamelCase}())) {
+			errors.rejectValue("${property}", "${msg}", ${args}, null);
 			return;
 		}

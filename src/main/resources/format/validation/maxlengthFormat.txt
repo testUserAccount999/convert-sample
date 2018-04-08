@@ -1,4 +1,4 @@
-		if (!CommonValidator.validateMaxLength(form.get${propertyUpperCamelCase}(), ${maxlength})) {
-			errors.reject("${property}", "${msg}", new Object[]{${args}}, null);
+		if (!${org.sample.convert.util.maxlength}.validateMaxLength(form.get${propertyUpperCamelCase}(), ${maxlength})) {
+			errors.rejectValue("${property}", "${msg}", ${args}, null);
 			return;
 		}

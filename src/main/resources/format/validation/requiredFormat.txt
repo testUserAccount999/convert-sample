@@ -1,4 +1,4 @@
-		if (!CommonValidator.validateRequired(form.get${propertyUpperCamelCase}())) {
-			errors.reject("${property}", "${msg}", new Object[]{${args}}, null);
+		if (!${org.sample.convert.util.required}.validateRequired(form.get${propertyUpperCamelCase}())) {
+			errors.rejectValue("${property}", "${msg}", ${args}, null);
 			return;
 		}
